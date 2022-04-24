@@ -146,6 +146,7 @@ class App extends Component {
           validationNameError={validationNameError}
           validationAmountError={validationAmountError}
         />
+
         <TransactionList list={list} removeListItem={this.remove} />
       </div>
     );

@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
 import TransactionItem from "./TransactionItem";
 import SumTransaction from "./SumTransaction";
 
@@ -20,16 +27,16 @@ export default class TransactionList extends Component {
 
     const maxElementEuro = Math.max.apply(
       Math,
-      listItems.map((item) => item.props.amount)
+      listItems.map((item) => item.props.pln)
     );
     const maxElementPln = Math.max.apply(
       Math,
-      listItems.map((item) => item.props.pln)
+      listItems.map((item) => item.props.amount)
     );
     const maxValueObject = listItems.filter(
-      (item) => item.props.amount === maxElementEuro
+      (item) => item.props.amount === maxElementEuro,
+      (item) => item.props.amount === maxElementPln
     );
-    const maxValueNameArr = maxValueObject.map((item) => item.props.name);
 
     function sumProperty(arr, type) {
       return arr.reduce((total, obj) => {
@@ -37,23 +44,50 @@ export default class TransactionList extends Component {
       }, 0);
     }
 
-    let totalAmountPln = sumProperty(listItems, "amount").toFixed(2);
-    let totalAmountEuro = sumProperty(listItems, "pln").toFixed(2);
+    let totalAmountPln = sumProperty(listItems, "amount");
+    let totalAmountEuro = sumProperty(listItems, "pln");
 
     return (
       <div>
+        <TableContainer>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">Title</TableCell>
+                <TableCell align="right">Amount(PLN)</TableCell>
+                <TableCell align="right">Amount(Euro)</TableCell>
+                <TableCell align="right">Option</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {listItems.map((listItems) => (
+                <TableRow key={listItems.name}>
+                  <TableCell component="th" scope="row">
+                    {listItems.name}
+                  </TableCell>
+                  <TableCell align="right">{listItems.pln}</TableCell>
+                  <TableCell align="right">{listItems.amount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
         <ul>
-          <label>title</label>
           <div>{listItems}</div>
+          {/* <span>
+            <span>{listItems.name}</span>
+            <span>{listItems.pln}</span>
+          </span>
+          <span>
+            <span>{listItems.amount}</span>
+          </span> */}
         </ul>
-        {listItems.length ? (
-          <div>
-            <SumTransaction
-              totalAmountEuro={totalAmountEuro}
-              totalAmountPln={totalAmountPln}
-            />
-          </div>
-        ) : null}
+        <div>
+          <SumTransaction
+            totalAmountEuro={totalAmountEuro}
+            totalAmountPln={totalAmountPln}
+          />
+        </div>
       </div>
     );
   }
@@ -62,16 +96,3 @@ export default class TransactionList extends Component {
 TransactionList.propTypes = {
   list: PropTypes.array.isRequired,
 };
-
-// const TransactionList = () => {
-//   const myLists = ["A", "B", "C"];
-
-//   return (
-//     <>
-//       <h1>welcome</h1>
-//       <ul>{myLists}</ul>
-//     </>
-//   );
-// };
-
-// export default TransactionList;
