@@ -135,6 +135,7 @@ class App extends Component {
       <div className="currency">
         <Title />
         <ExchangeRate exchangeRate={exchangeRate} />
+
         <AddTransaction
           addItem={this.add}
           name={name}
@@ -146,6 +147,7 @@ class App extends Component {
           validationNameError={validationNameError}
           validationAmountError={validationAmountError}
         />
+
         <TransactionList list={list} removeListItem={this.remove} />
       </div>
     );

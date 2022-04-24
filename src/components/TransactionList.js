@@ -29,31 +29,26 @@ export default class TransactionList extends Component {
     const maxValueObject = listItems.filter(
       (item) => item.props.amount === maxElementEuro
     );
-    const maxValueNameArr = maxValueObject.map((item) => item.props.name);
-
     function sumProperty(arr, type) {
       return arr.reduce((total, obj) => {
         return total + obj.props[type];
       }, 0);
     }
 
-    let totalAmountPln = sumProperty(listItems, "amount").toFixed(2);
-    let totalAmountEuro = sumProperty(listItems, "pln").toFixed(2);
+    let totalAmountEuro = sumProperty(listItems, "amount").toFixed(2);
+    let totalAmountPln = sumProperty(listItems, "pln");
 
     return (
       <div>
         <ul>
-          <label>title</label>
           <div>{listItems}</div>
         </ul>
-        {listItems.length ? (
-          <div>
-            <SumTransaction
-              totalAmountEuro={totalAmountEuro}
-              totalAmountPln={totalAmountPln}
-            />
-          </div>
-        ) : null}
+        <div>
+          <SumTransaction
+            totalAmountEuro={totalAmountEuro}
+            totalAmountPln={totalAmountPln}
+          />
+        </div>
       </div>
     );
   }
@@ -62,16 +57,3 @@ export default class TransactionList extends Component {
 TransactionList.propTypes = {
   list: PropTypes.array.isRequired,
 };
-
-// const TransactionList = () => {
-//   const myLists = ["A", "B", "C"];
-
-//   return (
-//     <>
-//       <h1>welcome</h1>
-//       <ul>{myLists}</ul>
-//     </>
-//   );
-// };
-
-// export default TransactionList;
