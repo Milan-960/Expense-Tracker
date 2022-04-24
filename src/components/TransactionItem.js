@@ -1,18 +1,17 @@
 import React from "react";
 
-const TransactionItem = ({ name, amount, pln, removeItem }) => {
+const TransactionItem = ({ name, amount, pln, removeItem, listItems }) => {
   return (
     <div>
       <li>
         <span>{name}</span>
         <span>
-          <span>{pln}</span>
+          <span>{pln} pln</span>
         </span>
-        <span>{name}</span>
         <span>
-          <span>{amount}</span>
+          <span>{amount} Euro</span>
         </span>
-        <button onClick={removeItem}>x</button>
+        <button onClick={removeItem}>Delete</button>
       </li>
     </div>
   );
