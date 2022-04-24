@@ -35,7 +35,7 @@ export default class TransactionList extends Component {
       }, 0);
     }
 
-    let totalAmountEuro = sumProperty(listItems, "amount").toFixed(2);
+    let totalAmountEuro = sumProperty(listItems, "amount");
     let totalAmountPln = sumProperty(listItems, "pln");
 
     return (
