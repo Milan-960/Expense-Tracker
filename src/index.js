@@ -1,13 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+
 import App from "./App";
+
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
+let list = [];
+let storedList = localStorage.getItem("storedTasks");
+
+if (storedList) {
+  list = JSON.parse(storedList);
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App storedList={list} />
   </React.StrictMode>,
   document.getElementById("root")
 );
