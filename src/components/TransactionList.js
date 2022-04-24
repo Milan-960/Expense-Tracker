@@ -29,11 +29,12 @@ export default class TransactionList extends Component {
     const maxValueObject = listItems.filter(
       (item) => item.props.amount === maxElementEuro
     );
-    function sumProperty(arr, type) {
-      return arr.reduce((total, obj) => {
-        return total + obj.props[type];
-      }, 0);
-    }
+
+    // function sumProperty(arr, type) {
+    //   return arr.reduce((total, obj) => {
+    //     return total + obj.props[type];
+    //   }, 0);
+    // }
 
     return (
       <div>
