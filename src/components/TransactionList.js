@@ -30,12 +30,6 @@ export default class TransactionList extends Component {
       (item) => item.props.amount === maxElementEuro
     );
 
-    // function sumProperty(arr, type) {
-    //   return arr.reduce((total, obj) => {
-    //     return total + obj.props[type];
-    //   }, 0);
-    // }
-
     return (
       <div>
         <ul>
