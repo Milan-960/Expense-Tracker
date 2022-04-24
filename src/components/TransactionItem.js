@@ -1,6 +1,6 @@
 import React from "react";
 
-const TransactionItem = ({ name, amount, pln, removeItem, listItems }) => {
+const TransactionItem = ({ name, amount, pln, removeItem }) => {
   return (
     <div>
       <li>

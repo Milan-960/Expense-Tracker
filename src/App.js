@@ -35,29 +35,24 @@ class App extends Component {
     });
   }
 
-  handleNameChange(e) {
-    let nameVal = e.target.value;
+  handleNameChange(event) {
+    let nameVal = event.target.value;
     this.setState({ name: nameVal, validationNameError: false });
-    console.log(nameVal);
   }
 
-  handleAmountChange(e) {
-    let amountVal = e.target.value;
+  handleAmountChange(event) {
+    let amountVal = event.target.value;
     this.setState({
       amount: +amountVal,
       validationAmountError: false,
     });
-    console.log(amountVal);
   }
 
-  add(e) {
-    e.preventDefault();
+  add(event) {
+    event.preventDefault();
 
     let nameVal = document.getElementById("transactionName").value;
     let amountVal = document.getElementById("transactionValue").value;
-
-    console.log(nameVal);
-    console.log(amountVal);
 
     const nameValidator = new RegExp("^[a-zA-Z ]+$");
     const amountValidator = new RegExp("^-?(?!0.)\\d+$");
@@ -67,8 +62,8 @@ class App extends Component {
     const newList = [
       {
         name: this.state.name,
-        amount: this.state.amount,
-        pln: +(this.state.amount * this.state.exchangeRate).toFixed(2),
+        pln: this.state.amount,
+        amount: +(this.state.amount / this.state.exchangeRate).toFixed(2),
       },
       ...this.state.list,
     ];
@@ -108,10 +103,10 @@ class App extends Component {
 
   remove(index) {
     this.setState({
-      list: this.state.list.filter((e, i) => i !== index),
+      list: this.state.list.filter((event, i) => i !== index),
     });
     let updatedList = this.state.list;
-    updatedList = updatedList.filter((e, i) => i !== index);
+    updatedList = updatedList.filter((event, i) => i !== index);
     this.setState({ storedList: updatedList });
     this.updatedLocalStorage(updatedList);
   }
@@ -138,15 +133,14 @@ class App extends Component {
         <AddTransaction
           addItem={this.add}
           name={name}
-          amount={amount}
           pln={pln}
+          amount={amount}
           handleNameChange={this.handleNameChange}
           handleAmountChange={this.handleAmountChange}
           list={list}
           validationNameError={validationNameError}
           validationAmountError={validationAmountError}
         />
-
         <TransactionList list={list} removeListItem={this.remove} />
       </div>
     );

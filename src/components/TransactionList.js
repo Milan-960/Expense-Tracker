@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import TransactionItem from "./TransactionItem";
 import SumTransaction from "./SumTransaction";
@@ -13,30 +12,17 @@ import TableRow from "@mui/material/TableRow";
 
 export default class TransactionList extends Component {
   render() {
-    const listItems = this.props.list.map((elem, i) => {
+    const listItems = this.props.list.map((list, i) => {
       return (
         <TransactionItem
           key={i}
-          name={elem.name}
-          amount={elem.amount}
-          pln={elem.pln}
+          name={list.name}
+          amount={list.amount}
+          pln={list.pln}
           removeItem={this.props.removeListItem.bind(this, i)}
         />
       );
     });
-
-    const maxElementEuro = Math.max.apply(
-      Math,
-      listItems.map((item) => item.props.pln)
-    );
-    const maxElementPln = Math.max.apply(
-      Math,
-      listItems.map((item) => item.props.amount)
-    );
-    const maxValueObject = listItems.filter(
-      (item) => item.props.amount === maxElementEuro,
-      (item) => item.props.amount === maxElementPln
-    );
 
     function sumProperty(arr, type) {
       return arr.reduce((total, obj) => {
@@ -60,13 +46,12 @@ export default class TransactionList extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listItems.map((listItems) => (
-                <TableRow key={listItems.name}>
-                  <TableCell component="th" scope="row">
-                    {listItems.name}
-                  </TableCell>
+              {listItems?.map((list, index) => (
+                <TableRow key={index.name}>
+                  <TableCell align="right">{listItems.name}</TableCell>
                   <TableCell align="right">{listItems.pln}</TableCell>
                   <TableCell align="right">{listItems.amount}</TableCell>
+                  <TableCell align="right">{listItems.removeItem}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -74,13 +59,6 @@ export default class TransactionList extends Component {
         </TableContainer>
         <ul>
           <div>{listItems}</div>
-          {/* <span>
-            <span>{listItems.name}</span>
-            <span>{listItems.pln}</span>
-          </span>
-          <span>
-            <span>{listItems.amount}</span>
-          </span> */}
         </ul>
         <div>
           <SumTransaction
@@ -92,7 +70,3 @@ export default class TransactionList extends Component {
     );
   }
 }
-
-TransactionList.propTypes = {
-  list: PropTypes.array.isRequired,
-};
