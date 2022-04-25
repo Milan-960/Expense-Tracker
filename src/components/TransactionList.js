@@ -12,6 +12,10 @@ import TableRow from "@mui/material/TableRow";
 
 export default class TransactionList extends Component {
   render() {
+    function transactionItem(name, pln, amount, removeItem) {
+      return { name, pln, amount, removeItem };
+    }
+
     const listItems = this.props.list.map((list, i) => {
       return (
         <TransactionItem
@@ -36,6 +40,30 @@ export default class TransactionList extends Component {
     return (
       <div>
         <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">Title</TableCell>
+                <TableCell align="right">Amount(PLN)</TableCell>
+                <TableCell align="right">Amount(Euro)</TableCell>
+                <TableCell align="right">Option</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {listItems?.map((listItems, i) => (
+                <TableRow key={listItems.i}>
+                  <TableCell>{transactionItem.name}</TableCell>
+                  <TableCell align="right">{transactionItem.pln}</TableCell>
+                  <TableCell align="right">{transactionItem.amount}</TableCell>
+                  <TableCell align="right">
+                    {transactionItem.removeItem}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TableContainer>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -46,8 +74,8 @@ export default class TransactionList extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listItems?.map((list, index) => (
-                <TableRow key={index.name}>
+              {listItems?.map((list, i) => (
+                <TableRow key={list.i}>
                   <TableCell align="right">{listItems.name}</TableCell>
                   <TableCell align="right">{listItems.pln}</TableCell>
                   <TableCell align="right">{listItems.amount}</TableCell>

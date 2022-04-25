@@ -5,7 +5,6 @@ import React from "react";
 const AddTransaction = ({
   name,
   amount,
-  pln,
   handleNameChange,
   handleAmountChange,
   addItem,

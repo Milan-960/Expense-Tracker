@@ -5,23 +5,12 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
-let list = [];
-let storedList = localStorage.getItem("storedTasks");
-
-if (storedList) {
-  list = JSON.parse(storedList);
-}
-
 ReactDOM.render(
   <React.StrictMode>
-    <App storedList={list} />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   ReactDom.render(<App storedList={list} />, document.querySelector("#root"));
-// });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
