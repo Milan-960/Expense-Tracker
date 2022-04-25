@@ -159,10 +159,7 @@ const App = () => {
   return (
     <>
       <div className="currency">
-        <Test storedList={list} />
-        {/* <ExchangeRate />
-        <AddTransaction />
-        <TransactionList /> */}
+
       </div>
     </>
   );
