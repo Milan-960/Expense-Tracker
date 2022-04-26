@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Title from "./Title";
 import ExchangeRate from "./ExchangeRate";
 import AddTransaction from "./AddTransaction";
 import TransactionList from "./TransactionList";
 
-class Test extends Component {
+class Currency extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +15,6 @@ class Test extends Component {
       amount: "",
       pln: "",
       validationNameError: false,
-      validationAmountError: false,
     };
 
     this.add = this.add.bind(this);
@@ -35,14 +33,13 @@ class Test extends Component {
 
   handleNameChange(event) {
     let nameVal = event.target.value;
-    this.setState({ name: nameVal, validationNameError: false });
+    this.setState({ name: nameVal });
   }
 
   handleAmountChange(event) {
     let amountVal = event.target.value;
     this.setState({
       amount: +amountVal,
-      validationAmountError: false,
     });
   }
 
@@ -70,20 +67,17 @@ class Test extends Component {
       this.setState({ list: newList, name: "", amount: "" });
     } else if (isNameValid && !isAmountValid) {
       this.setState({
-        validationAmountError: true,
         name: this.state.name,
         amount: "",
       });
     } else if (!isNameValid && isAmountValid) {
       this.setState({
-        validationNameError: true,
         name: "",
         amount: this.state.amount,
       });
     } else {
       this.setState({
         validationNameError: true,
-        validationAmountError: true,
         name: "",
         amount: "",
       });
@@ -114,19 +108,11 @@ class Test extends Component {
   }
 
   render() {
-    const {
-      exchangeRate,
-      name,
-      amount,
-      pln,
-      list,
-      validationNameError,
-      validationAmountError,
-    } = this.state;
+    const { exchangeRate, name, amount, pln, list, validationNameError } =
+      this.state;
 
     return (
       <div className="currency">
-        <Title />
         <ExchangeRate exchangeRate={exchangeRate} />
         <AddTransaction
           addItem={this.add}
@@ -137,7 +123,6 @@ class Test extends Component {
           handleAmountChange={this.handleAmountChange}
           list={list}
           validationNameError={validationNameError}
-          validationAmountError={validationAmountError}
         />
         <TransactionList list={list} removeListItem={this.remove} />
       </div>
@@ -145,4 +130,4 @@ class Test extends Component {
   }
 }
 
-export default Test;
+export default Currency;
