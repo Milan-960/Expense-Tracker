@@ -1,6 +1,6 @@
 import React from "react";
-// import ValidationNameError from "./ValidationNameError";
-// import ValidationAmountError from "./ValidationAmountError";
+
+import ValidationNameError from "./Error/ValidationNameError";
 
 const AddTransaction = ({
   name,
@@ -9,12 +9,11 @@ const AddTransaction = ({
   handleAmountChange,
   addItem,
   validationNameError,
-  validationAmountError,
 }) => {
   return (
-    <div>
+    <div className="form">
       <form>
-        <div>
+        <div className="from_input">
           <label htmlFor="transactionName">Name:</label>
           <input
             type="text"
@@ -24,7 +23,7 @@ const AddTransaction = ({
             onChange={handleNameChange}
           />
         </div>
-        <div>
+        <div className="from_input">
           <label htmlFor="transactionValue">Amount (Pln)</label>
           <input
             type="number"
@@ -34,10 +33,7 @@ const AddTransaction = ({
           />
         </div>
         <button onClick={addItem}>add transaction</button>
-        <div>
-          {/* {validationNameError ? <ValidationNameError /> : null}
-        {validationAmountError ? <ValidationAmountError /> : null} */}
-        </div>
+        <div>{validationNameError ? <ValidationNameError /> : null}</div>
       </form>
     </div>
   );

@@ -2,12 +2,10 @@ import React from "react";
 
 import "./App.css";
 
-import Test from "./components/Test";
-
 import Title from "./components/Title";
-import ExchangeRate from "./components/ExchangeRate";
+import Currency from "./components/Currency";
 
-const App = ({ exchangeRate }) => {
+const App = () => {
   let list = [];
   let storedList = localStorage.getItem("storedTasks");
 
@@ -19,8 +17,7 @@ const App = ({ exchangeRate }) => {
     <>
       <div className="currency">
         <Title />
-        <ExchangeRate exchangeRate={exchangeRate} />
-        <Test storedList={list} />
+        <Currency storedList={list} />
       </div>
     </>
   );
